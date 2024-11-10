@@ -23,16 +23,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Submit form data
     document.getElementById("availability-form").addEventListener("submit", async (event) => {
         event.preventDefault();
-        const name = document.getElementById("name").value;
+
+        // Normalize the name to lowercase and trim spaces
+        const nameInput = document.getElementById("name").value.trim().toLowerCase();
         const timeSlots = Array.from(document.querySelectorAll(".time-slot")).map(slot => ({
             start: slot.querySelector(".start-time").value,
             end: slot.querySelector(".end-time").value
         }));
 
         try {
-            // Check if the user already exists
             const usersCollection = collection(db, "availability");
-            const q = query(usersCollection, where("name", "==", name));
+
+            // Check if a user with the normalized name exists
+            const q = query(usersCollection, where("name", "==", nameInput));
             const querySnapshot = await getDocs(q);
 
             if (querySnapshot.size >= 90) {
@@ -44,11 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Update existing user
                 const userDoc = querySnapshot.docs[0];
                 await updateDoc(doc(db, "availability", userDoc.id), { timeSlots });
-                alert("Availability updated!");
+                alert("Availability updated for existing user.");
             } else {
-                // Add new user
-                await addDoc(usersCollection, { name, timeSlots });
-                alert("Availability submitted!");
+                // Add new user with normalized name
+                await addDoc(usersCollection, { name: nameInput, timeSlots });
+                alert("New user created and availability submitted.");
             }
 
             loadHeatmap(); // Refresh heatmap after submission
