@@ -25,10 +25,13 @@ body {
     text-align: left;
 }
 
-.heatmap-label {
+.hour-labels {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+    text-align: center;
     font-weight: bold;
     margin-bottom: 5px;
-    text-align: left;
 }
 
 .bar {
@@ -62,7 +65,7 @@ body {
     /* Dark green */
 }
 
-/* Responsive styles for heatmap and background */
+/* Responsive adjustments */
 @media (max-width: 600px) {
     body {
         background-size: auto 100%;
@@ -73,22 +76,12 @@ body {
         width: 90%;
     }
 
-    .heatmap-bar {
-        margin-top: 15px;
-    }
-
-    .bar {
-        grid-template-columns: repeat(6, 1fr);
-        /* Stack in two rows of 6 for smaller screens */
+    .hour-labels {
+        font-size: 10px;
     }
 
     .bar div {
         height: 25px;
         font-size: 10px;
-    }
-
-    .heatmap-label {
-        font-size: 14px;
-        text-align: center;
     }
 }

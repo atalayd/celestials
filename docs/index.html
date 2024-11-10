@@ -32,14 +32,22 @@
             <button type="button" id="add-slot">Add More Slots</button>
             <button type="submit">Submit Availability</button>
         </form>
+
+        <!-- Heatmap with hour labels above each box -->
         <div id="heatmap">
             <h2>Availability Heatmap</h2>
-            <div id="am-heatmap" class="heatmap-bar">
-                <div class="heatmap-label">AM (00:00 - 11:00)</div>
+            <div class="heatmap-bar">
+                <div class="hour-labels">
+                    <span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+                    <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span>
+                </div>
                 <div id="am-bar" class="bar"></div>
             </div>
-            <div id="pm-heatmap" class="heatmap-bar">
-                <div class="heatmap-label">PM (12:00 - 23:00)</div>
+            <div class="heatmap-bar">
+                <div class="hour-labels">
+                    <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+                    <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+                </div>
                 <div id="pm-bar" class="bar"></div>
             </div>
         </div>
