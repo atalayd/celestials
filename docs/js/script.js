@@ -72,12 +72,19 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        // Clear and render heatmap grid
+        // Clear and render heatmap grid with hour labels
         heatmapGrid.innerHTML = "";
-        hours.forEach(count => {
+        hours.forEach((count, hour) => {
             const cell = document.createElement("div");
-            cell.style.backgroundColor = `rgba(0, 128, 0, ${count / 10})`; // Color intensity based on count
+            cell.className = count > 5 ? "high" : count > 2 ? "medium" : "low";
+            cell.textContent = count; // Display count inside the cell
+
+            const label = document.createElement("div");
+            label.className = "hour-label";
+            label.textContent = `${hour.toString().padStart(2, '0')}:00`;
+
             heatmapGrid.appendChild(cell);
+            heatmapGrid.appendChild(label);
         });
     }
 
