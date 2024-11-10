@@ -62,7 +62,7 @@ body {
     /* Dark green */
 }
 
-/* Responsive background adjustments for mobile */
+/* Responsive styles for heatmap and background */
 @media (max-width: 600px) {
     body {
         background-size: auto 100%;
@@ -71,5 +71,24 @@ body {
 
     #container {
         width: 90%;
+    }
+
+    .heatmap-bar {
+        margin-top: 15px;
+    }
+
+    .bar {
+        grid-template-columns: repeat(6, 1fr);
+        /* Stack in two rows of 6 for smaller screens */
+    }
+
+    .bar div {
+        height: 25px;
+        font-size: 10px;
+    }
+
+    .heatmap-label {
+        font-size: 14px;
+        text-align: center;
     }
 }
