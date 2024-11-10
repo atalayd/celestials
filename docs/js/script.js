@@ -97,16 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const timeZones = {
-        "New_York": -5,
-        "London": 0,
-        "Sydney": 10,
-        "Tokyo": 9,
-        "Istanbul": 3,
-        "Berlin": 1,
-        "Los_Angeles": -8,
-        "Shanghai": 8,
-        "Seoul": 9,
-        "Cairo": 2
+        "New_York": "America/New_York",
+        "London": "Europe/London",
+        "Sydney": "Australia/Sydney",
+        "Tokyo": "Asia/Tokyo",
+        "Istanbul": "Europe/Istanbul",
+        "Berlin": "Europe/Berlin",
+        "Los_Angeles": "America/Los_Angeles",
+        "Shanghai": "Asia/Shanghai",
+        "Seoul": "Asia/Seoul",
+        "Cairo": "Africa/Cairo"
     };
 
     document.getElementById("convert-time").addEventListener("click", () => {
@@ -122,14 +122,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const utcDate = new Date();
         utcDate.setUTCHours(hours, minutes, 0, 0);
 
-        const offset = timeZones[city];
-        const convertedDate = new Date(utcDate.getTime() + offset * 60 * 60 * 1000);
-        const convertedHours = convertedDate.getHours().toString().padStart(2, "0");
-        const convertedMinutes = convertedDate.getMinutes().toString().padStart(2, "0");
+        const timeZone = timeZones[city];
+        const options = {
+            timeZone: timeZone,
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        };
+        const convertedTime = new Intl.DateTimeFormat('en-GB', options).format(utcDate);
 
         const cityName = document.getElementById("city").selectedOptions[0].textContent;
         const display = document.getElementById("converted-time-display");
-        display.textContent = `${cityName}: ${convertedHours}:${convertedMinutes}`;
+        display.textContent = `${cityName}: ${convertedTime}`;
     });
 
     loadHeatmap();
