@@ -2,7 +2,7 @@ import { db } from "./firebase-config.js";
 import { collection, getDocs, query, where, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 // Define the unique code here
-const uniqueCode = "2025"; // Replace "YOUR_UNIQUE_CODE" with the code you want to use
+const uniqueCode = "2025"; // Set your desired unique code here
 
 document.addEventListener("DOMContentLoaded", () => {
     const amBar = document.getElementById("am-bar");
@@ -29,8 +29,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Get the name, code, and normalize the name
         const nameInput = document.getElementById("name").value.trim().toLowerCase();
-        const enteredCode = document.getElementById("code").value;
+        const enteredCode = document.getElementById("code").value.trim();
 
+        // Check if the entered code matches the unique code
         if (enteredCode !== uniqueCode) {
             alert("Invalid code. Please enter the correct unique code.");
             return; // Exit the function if the code doesn't match
