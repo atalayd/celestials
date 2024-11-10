@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('/docs/images/banner_Celestials.webp');
+    background-image: url('../images/banner_Celestials.webp');
     /* Replace with your actual path */
     background-size: cover;
     /* Make the image cover the entire viewport */
