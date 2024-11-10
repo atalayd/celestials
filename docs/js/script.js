@@ -2,7 +2,8 @@ import { db } from "./firebase-config.js";
 import { collection, getDocs, query, where, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-    const heatmapGrid = document.getElementById("heatmap-grid");
+    const amBar = document.getElementById("am-bar");
+    const pmBar = document.getElementById("pm-bar");
 
     // Add more slots up to 3
     document.getElementById("add-slot").addEventListener("click", () => {
@@ -58,7 +59,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to load and display heatmap
     async function loadHeatmap() {
-        const hours = Array(24).fill(0); // Initialize array to count availability for each hour
+        const amHours = Array(12).fill(0); // 00:00 to 11:00
+        const pmHours = Array(12).fill(0); // 12:00 to 23:00
 
         const snapshot = await getDocs(collection(db, "availability"));
         snapshot.forEach(doc => {
@@ -67,24 +69,28 @@ document.addEventListener("DOMContentLoaded", () => {
                 const startHour = parseInt(slot.start.split(":")[0]);
                 const endHour = parseInt(slot.end.split(":")[0]);
                 for (let i = startHour; i < endHour; i++) {
-                    hours[i]++;
+                    if (i < 12) amHours[i]++;
+                    else pmHours[i - 12]++;
                 }
             });
         });
 
-        // Clear and render heatmap grid with hour labels
-        heatmapGrid.innerHTML = "";
-        hours.forEach((count, hour) => {
+        // Clear and populate AM bar
+        amBar.innerHTML = "";
+        amHours.forEach((count, hour) => {
             const cell = document.createElement("div");
             cell.className = count > 5 ? "high" : count > 2 ? "medium" : "low";
-            cell.textContent = count; // Display count inside the cell
+            cell.textContent = count > 0 ? count : ""; // Display count if more than 0
+            amBar.appendChild(cell);
+        });
 
-            const label = document.createElement("div");
-            label.className = "hour-label";
-            label.textContent = `${hour.toString().padStart(2, '0')}:00`;
-
-            heatmapGrid.appendChild(cell);
-            heatmapGrid.appendChild(label);
+        // Clear and populate PM bar
+        pmBar.innerHTML = "";
+        pmHours.forEach((count, hour) => {
+            const cell = document.createElement("div");
+            cell.className = count > 5 ? "high" : count > 2 ? "medium" : "low";
+            cell.textContent = count > 0 ? count : ""; // Display count if more than 0
+            pmBar.appendChild(cell);
         });
     }
 
