@@ -85,3 +85,60 @@ body {
         font-size: 10px;
     }
 }
+
+/* Existing styles remain unchanged */
+
+#time-converter {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#time-converter h2 {
+    text-align: center;
+}
+
+#converted-times {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.converted-time {
+    background-color: #f0f0f0;
+    padding: 8px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .hour-labels {
+        font-size: 10px;
+    }
+
+    .bar div {
+        height: 25px;
+        font-size: 10px;
+    }
+
+    #converted-times {
+        grid-template-columns: 1fr;
+    }
+}
+
+#time-converter {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#time-converter h2,
+#heatmap h2 {
+    text-align: center;
+}
+
+#converted-time-display {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+}

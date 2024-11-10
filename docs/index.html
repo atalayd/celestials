@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Availability Tracker</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Firebase SDK links -->
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
     <script type="module" src="js/script.js"></script>
@@ -19,7 +18,7 @@
             <label for="name">Name:</label>
             <input type="text" id="name" required placeholder="Enter your name">
 
-            <label for="code">Unique Code:</label> <!-- New code field -->
+            <label for="code">Unique Code:</label>
             <input type="password" id="code" required placeholder="Enter the unique code">
 
             <div id="time-slots">
@@ -33,7 +32,7 @@
             <button type="submit">Submit Availability</button>
         </form>
 
-        <!-- Heatmap with hour labels above each box -->
+        <!-- Heatmap and Time Converter Section -->
         <div id="heatmap">
             <h2>Availability Heatmap</h2>
             <div class="heatmap-bar">
@@ -50,6 +49,29 @@
                 </div>
                 <div id="pm-bar" class="bar"></div>
             </div>
+        </div>
+
+        <!-- Time Zone Converter with City Dropdown -->
+        <div id="time-converter">
+            <h2>Time Zone Converter</h2>
+            <label for="server-time">Server Time (UTC):</label>
+            <input type="time" id="server-time" required>
+
+            <label for="city">Select City:</label>
+            <select id="city">
+                <option value="New_York">New York - EST</option>
+                <option value="London">London - GMT</option>
+                <option value="Sydney">Sydney - AEST</option>
+                <option value="Tokyo">Tokyo - JST</option>
+                <option value="Istanbul">Istanbul - TRT</option>
+                <option value="Berlin">Berlin - CET</option>
+                <option value="Los_Angeles">Los Angeles - PST</option>
+                <option value="Shanghai">Shanghai - CST</option>
+                <option value="Seoul">Seoul - KST</option>
+                <option value="Cairo">Cairo - EET</option>
+            </select>
+            <button id="convert-time">Convert Time</button>
+            <div id="converted-time-display"></div>
         </div>
     </div>
 </body>
