@@ -8,12 +8,19 @@
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
     <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-    <script type="module" src="js/script.js"></script>
+    <script type="module" src="js/script.js?v=1.2"></script> <!-- Cache-busting parameter -->
 </head>
 
 <body>
     <div id="container">
         <h1>Enter Your Availability</h1>
+
+        <!-- Toggle Buttons for Weekdays/Weekend -->
+        <div id="toggle-buttons">
+            <button id="weekdays-btn" class="toggle active">Weekdays</button>
+            <button id="weekend-btn" class="toggle">Weekend</button>
+        </div>
+
         <form id="availability-form">
             <label for="name">Name:</label>
             <input type="text" id="name" required placeholder="Enter your name">
@@ -32,9 +39,9 @@
             <button type="submit">Submit Availability</button>
         </form>
 
-        <!-- Heatmap and Time Converter Section -->
+        <!-- Heatmap with hour labels -->
         <div id="heatmap">
-            <h2>Availability Heatmap</h2>
+            <h2 id="heatmap-title">Weekdays Availability Heatmap</h2>
             <div class="heatmap-bar">
                 <div class="hour-labels">
                     <span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>

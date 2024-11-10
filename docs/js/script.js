@@ -2,10 +2,28 @@ import { db } from "./firebase-config.js";
 import { collection, getDocs, query, where, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 const uniqueCode = "2025"; // Set your desired unique code here
+let selectedType = "weekday"; // Default selection for weekdays
 
 document.addEventListener("DOMContentLoaded", () => {
+    const weekdaysBtn = document.getElementById("weekdays-btn");
+    const weekendBtn = document.getElementById("weekend-btn");
     const amBar = document.getElementById("am-bar");
     const pmBar = document.getElementById("pm-bar");
+
+    // Toggle between weekdays and weekend
+    weekdaysBtn.addEventListener("click", () => toggleDayType("weekday"));
+    weekendBtn.addEventListener("click", () => toggleDayType("weekend"));
+
+    function toggleDayType(type) {
+        selectedType = type;
+        weekdaysBtn.classList.toggle("active", type === "weekday");
+        weekendBtn.classList.toggle("active", type === "weekend");
+
+        document.getElementById("heatmap-title").textContent =
+            type === "weekday" ? "Weekdays Availability Heatmap" : "Weekend Availability Heatmap";
+
+        loadHeatmap();
+    }
 
     document.getElementById("add-slot").addEventListener("click", () => {
         const timeSlots = document.getElementById("time-slots");
@@ -42,18 +60,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const q = query(usersCollection, where("name", "==", nameInput));
             const querySnapshot = await getDocs(q);
 
-            if (querySnapshot.size >= 90) {
-                alert("User limit reached. Please try again later.");
-                return;
-            }
+            const updateField = selectedType === "weekday" ? "weekdayTimeSlots" : "weekendTimeSlots";
 
             if (!querySnapshot.empty) {
                 const userDoc = querySnapshot.docs[0];
-                await updateDoc(doc(db, "availability", userDoc.id), { timeSlots });
-                alert("Availability updated for existing user.");
+                await updateDoc(doc(db, "availability", userDoc.id), { [updateField]: timeSlots });
+                alert(`Availability updated for existing user (${selectedType}).`);
             } else {
-                await addDoc(usersCollection, { name: nameInput, timeSlots });
-                alert("New user created and availability submitted.");
+                await addDoc(usersCollection, {
+                    name: nameInput,
+                    weekdayTimeSlots: selectedType === "weekday" ? timeSlots : [],
+                    weekendTimeSlots: selectedType === "weekend" ? timeSlots : []
+                });
+                alert(`New user created with ${selectedType} availability.`);
             }
 
             loadHeatmap();
@@ -68,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const snapshot = await getDocs(collection(db, "availability"));
         snapshot.forEach(doc => {
-            const timeSlots = doc.data().timeSlots;
+            const timeSlots = doc.data()[selectedType === "weekday" ? "weekdayTimeSlots" : "weekendTimeSlots"] || [];
             timeSlots.forEach(slot => {
                 const startHour = parseInt(slot.start.split(":")[0]);
                 const endHour = parseInt(slot.end.split(":")[0]);
@@ -136,5 +155,5 @@ document.addEventListener("DOMContentLoaded", () => {
         display.textContent = `${cityName}: ${convertedTime}`;
     });
 
-    loadHeatmap();
+    toggleDayType("weekday"); // Initialize as weekday
 });
