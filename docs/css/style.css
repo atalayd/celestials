@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('path/to/your/background-image.jpg');
+    background-image: url(docs\assets\images\banner_Celestials.webp);
     /* Replace with your actual path */
     background-size: cover;
     background-position: center;
