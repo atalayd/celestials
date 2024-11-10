@@ -1,6 +1,9 @@
 import { db } from "./firebase-config.js";
 import { collection, getDocs, query, where, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
+// Define the unique code here
+const uniqueCode = "2025"; // Replace "YOUR_UNIQUE_CODE" with the code you want to use
+
 document.addEventListener("DOMContentLoaded", () => {
     const amBar = document.getElementById("am-bar");
     const pmBar = document.getElementById("pm-bar");
@@ -24,8 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("availability-form").addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        // Normalize the name to lowercase and trim spaces
+        // Get the name, code, and normalize the name
         const nameInput = document.getElementById("name").value.trim().toLowerCase();
+        const enteredCode = document.getElementById("code").value;
+
+        if (enteredCode !== uniqueCode) {
+            alert("Invalid code. Please enter the correct unique code.");
+            return; // Exit the function if the code doesn't match
+        }
+
         const timeSlots = Array.from(document.querySelectorAll(".time-slot")).map(slot => ({
             start: slot.querySelector(".start-time").value,
             end: slot.querySelector(".end-time").value
