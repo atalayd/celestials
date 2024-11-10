@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+form,
+#heatmap {
+    margin-top: 20px;
+}
+
+#heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    gap: 2px;
+    margin-top: 10px;
+}
+
+.time-slot {
+    margin: 10px 0;
+}
