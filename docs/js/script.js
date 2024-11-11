@@ -124,8 +124,16 @@ document.addEventListener("DOMContentLoaded", () => {
         "Los_Angeles": "America/Los_Angeles",
         "Shanghai": "Asia/Shanghai",
         "Seoul": "Asia/Seoul",
-        "Cairo": "Africa/Cairo"
+        "Cairo": "Africa/Cairo",
+        "Helsinki": "Europe/Helsinki",             // Finland
+        "Moscow": "Europe/Moscow",                 // Russia
+        "Taipei": "Asia/Taipei",                   // Taiwan
+        "Sao_Paulo": "America/Sao_Paulo",          // Brazil
+        "Buenos_Aires": "America/Argentina/Buenos_Aires", // Argentina
+        "Paris": "Europe/Paris",                   // France
+        "Madrid": "Europe/Madrid"                  // Spain
     };
+
 
     document.getElementById("convert-time").addEventListener("click", () => {
         const serverTimeInput = document.getElementById("server-time").value;
