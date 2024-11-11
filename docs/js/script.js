@@ -47,17 +47,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("add-slot").addEventListener("click", () => {
         const timeSlots = document.getElementById("time-slots");
+
+        // Limit to 3 time slots
         if (timeSlots.childElementCount < 3) {
+            const slotNumber = timeSlots.childElementCount + 1;
+
+            // Create a new time slot container with a remove button
             const newSlot = document.createElement("div");
             newSlot.className = "time-slot";
             newSlot.innerHTML = `
-                <label>Time Slot ${timeSlots.childElementCount + 1}:</label>
-                <input type="time" class="start-time" required>
-                <input type="time" class="end-time" required>
-            `;
+            <label>Time Slot ${slotNumber}:</label>
+            <input type="time" class="start-time" required>
+            <input type="time" class="end-time" required>
+            ${slotNumber > 1 ? '<button type="button" class="remove-slot">×</button>' : ''}
+        `;
+
             timeSlots.appendChild(newSlot);
+
+            // Add event listener to the remove button
+            if (slotNumber > 1) {
+                newSlot.querySelector(".remove-slot").addEventListener("click", () => {
+                    timeSlots.removeChild(newSlot);
+                    updateSlotLabels();
+                });
+            }
         }
     });
+
+    // Function to update slot labels after a slot is removed
+    function updateSlotLabels() {
+        const slots = document.querySelectorAll(".time-slot");
+        slots.forEach((slot, index) => {
+            const label = slot.querySelector("label");
+            if (label) {
+                label.textContent = `Time Slot ${index + 1}:`;
+            }
+        });
+    }
+
 
     document.getElementById("availability-form").addEventListener("submit", async (event) => {
         event.preventDefault();
@@ -111,9 +138,23 @@ document.addEventListener("DOMContentLoaded", () => {
             timeSlots.forEach(slot => {
                 const startHour = parseInt(slot.start.split(":")[0]);
                 const endHour = parseInt(slot.end.split(":")[0]);
-                for (let i = startHour; i < endHour; i++) {
-                    if (i < 12) amHours[i]++;
-                    else pmHours[i - 12]++;
+
+                if (startHour <= endHour) {
+                    // Case 1: Time range within the same day (e.g., 10 AM to 4 PM)
+                    for (let i = startHour; i < endHour; i++) {
+                        if (i < 12) amHours[i]++;
+                        else pmHours[i - 12]++;
+                    }
+                } else {
+                    // Case 2: Time range spans midnight (e.g., 10 PM to 4 AM)
+                    for (let i = startHour; i < 24; i++) { // from startHour to 23
+                        if (i < 12) pmHours[i - 12]++;
+                        else pmHours[i - 12]++;
+                    }
+                    for (let i = 0; i < endHour; i++) { // from 0 to endHour
+                        if (i < 12) amHours[i]++;
+                        else amHours[i - 12]++;
+                    }
                 }
             });
         });
@@ -134,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
             pmBar.appendChild(cell);
         });
     }
+
 
     const timeZones = {
         "New_York": "America/New_York",
