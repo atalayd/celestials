@@ -5,6 +5,27 @@ const uniqueCode = "2025";
 let selectedType = "weekday";
 
 document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("availability-modal");
+    const openModalBtn = document.getElementById("availability-button");
+    const closeModalBtn = document.getElementById("close-modal");
+
+    // Open modal when the button is clicked
+    openModalBtn.addEventListener("click", () => {
+        modal.classList.add("active");
+    });
+
+    // Close modal when the close button is clicked
+    closeModalBtn.addEventListener("click", () => {
+        modal.classList.remove("active");
+    });
+
+    // Close modal when clicking outside the modal content
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.classList.remove("active");
+        }
+    });
+
     const weekdaysBtn = document.getElementById("weekdays-btn");
     const weekendBtn = document.getElementById("weekend-btn");
     const amBar = document.getElementById("am-bar");
@@ -21,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("heatmap-title").textContent =
             type === "weekday" ? "Weekdays Availability Heatmap" : "Weekend Availability Heatmap";
 
-        loadHeatmap(); // Reload heatmap data when switching
+        loadHeatmap();
     }
 
     document.getElementById("add-slot").addEventListener("click", () => {
@@ -133,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
         "Paris": "Europe/Paris",                   // France
         "Madrid": "Europe/Madrid"                  // Spain
     };
-
 
     document.getElementById("convert-time").addEventListener("click", () => {
         const serverTimeInput = document.getElementById("server-time").value;

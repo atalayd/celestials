@@ -12,81 +12,88 @@
 </head>
 
 <body>
-    <div id="container">
-        <h1>Enter Your Availability</h1>
+    <!-- Button to open modal -->
+    <button id="availability-button" class="fancy-button">Enter Your Availability</button>
 
-        <!-- Toggle Buttons for Weekdays/Weekend -->
-        <div id="toggle-buttons">
-            <button id="weekdays-btn" class="toggle active">Weekdays</button>
-            <button id="weekend-btn" class="toggle">Weekend</button>
-        </div>
+    <!-- Modal container -->
+    <div id="availability-modal" class="modal-container">
+        <div id="container" class="modal-content">
+            <span id="close-modal" class="close-button">&times;</span>
+            <h1>Enter Your Availability</h1>
 
-        <form id="availability-form">
-            <label for="name">Name:</label>
-            <input type="text" id="name" required placeholder="Enter your name">
+            <!-- Toggle Buttons for Weekdays/Weekend -->
+            <div id="toggle-buttons">
+                <button id="weekdays-btn" class="toggle active">Weekdays</button>
+                <button id="weekend-btn" class="toggle">Weekend</button>
+            </div>
 
-            <label for="code">Unique Code:</label>
-            <input type="password" id="code" required placeholder="Enter the unique code">
+            <form id="availability-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required placeholder="Enter your name">
 
-            <div id="time-slots">
-                <div class="time-slot">
-                    <label>Time Slot 1:</label>
-                    <input type="time" class="start-time" required>
-                    <input type="time" class="end-time" required>
+                <label for="code">Unique Code:</label>
+                <input type="password" id="code" required placeholder="Enter the unique code">
+
+                <div id="time-slots">
+                    <div class="time-slot">
+                        <label>Time Slot 1:</label>
+                        <input type="time" class="start-time" required>
+                        <input type="time" class="end-time" required>
+                    </div>
+                </div>
+                <button type="button" id="add-slot">Add More Slots</button>
+                <button type="submit">Submit Availability</button>
+            </form>
+
+            <!-- Heatmap with hour labels -->
+            <div id="heatmap">
+                <h2 id="heatmap-title">Weekdays Availability Heatmap</h2>
+                <div class="heatmap-bar">
+                    <div class="hour-labels">
+                        <span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+                        <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span>
+                    </div>
+                    <div id="am-bar" class="bar"></div>
+                </div>
+                <div class="heatmap-bar">
+                    <div class="hour-labels">
+                        <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+                        <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+                    </div>
+                    <div id="pm-bar" class="bar"></div>
                 </div>
             </div>
-            <button type="button" id="add-slot">Add More Slots</button>
-            <button type="submit">Submit Availability</button>
-        </form>
 
-        <!-- Heatmap with hour labels -->
-        <div id="heatmap">
-            <h2 id="heatmap-title">Weekdays Availability Heatmap</h2>
-            <div class="heatmap-bar">
-                <div class="hour-labels">
-                    <span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
-                    <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span>
-                </div>
-                <div id="am-bar" class="bar"></div>
+            <!-- Time Zone Converter with City Dropdown -->
+            <div id="time-converter">
+                <h2>Time Zone Converter</h2>
+                <label for="server-time">Server Time (UTC):</label>
+                <input type="time" id="server-time" required>
+
+                <label for="city">Select City:</label>
+                <select id="city">
+                    <option value="New_York">New York - EST</option>
+                    <option value="London">London - GMT</option>
+                    <option value="Sydney">Sydney - AEST</option>
+                    <option value="Tokyo">Tokyo - JST</option>
+                    <option value="Istanbul">Istanbul - TRT</option>
+                    <option value="Berlin">Berlin - CET</option>
+                    <option value="Los_Angeles">Los Angeles - PST</option>
+                    <option value="Shanghai">Shanghai - CST</option>
+                    <option value="Seoul">Seoul - KST</option>
+                    <option value="Cairo">Cairo - EET</option>
+                    <option value="Helsinki">Helsinki - EET</option> <!-- Finland -->
+                    <option value="Moscow">Moscow - MSK</option> <!-- Russia -->
+                    <option value="Taipei">Taipei - CST</option> <!-- Taiwan -->
+                    <option value="Sao_Paulo">São Paulo - BRT</option> <!-- Brazil -->
+                    <option value="Buenos_Aires">Buenos Aires - ART</option> <!-- Argentina -->
+                    <option value="Paris">Paris - CET</option> <!-- France -->
+                    <option value="Madrid">Madrid - CET</option> <!-- Spain -->
+                </select>
+
+                <button id="convert-time">Convert Time</button>
+                <div id="converted-time-display"></div>
             </div>
-            <div class="heatmap-bar">
-                <div class="hour-labels">
-                    <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
-                    <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
-                </div>
-                <div id="pm-bar" class="bar"></div>
-            </div>
-        </div>
-
-        <!-- Time Zone Converter with City Dropdown -->
-        <div id="time-converter">
-            <h2>Time Zone Converter</h2>
-            <label for="server-time">Server Time (UTC):</label>
-            <input type="time" id="server-time" required>
-
-            <label for="city">Select City:</label>
-            <select id="city">
-                <option value="New_York">New York - EST</option>
-                <option value="London">London - GMT</option>
-                <option value="Sydney">Sydney - AEST</option>
-                <option value="Tokyo">Tokyo - JST</option>
-                <option value="Istanbul">Istanbul - TRT</option>
-                <option value="Berlin">Berlin - CET</option>
-                <option value="Los_Angeles">Los Angeles - PST</option>
-                <option value="Shanghai">Shanghai - CST</option>
-                <option value="Seoul">Seoul - KST</option>
-                <option value="Cairo">Cairo - EET</option>
-                <option value="Helsinki">Helsinki - EET</option> <!-- Finland -->
-                <option value="Moscow">Moscow - MSK</option> <!-- Russia -->
-                <option value="Taipei">Taipei - CST</option> <!-- Taiwan -->
-                <option value="Sao_Paulo">São Paulo - BRT</option> <!-- Brazil -->
-                <option value="Buenos_Aires">Buenos Aires - ART</option> <!-- Argentina -->
-                <option value="Paris">Paris - CET</option> <!-- France -->
-                <option value="Madrid">Madrid - CET</option> <!-- Spain -->
-            </select>
-
-            <button id="convert-time">Convert Time</button>
-            <div id="converted-time-display"></div>
         </div>
     </div>
 </body>
