@@ -1,8 +1,8 @@
 import { db } from "./firebase-config.js";
 import { collection, getDocs, query, where, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-const uniqueCode = "2025"; // Set your desired unique code here
-let selectedType = "weekday"; // Default selection for weekdays
+const uniqueCode = "2025";
+let selectedType = "weekday";
 
 document.addEventListener("DOMContentLoaded", () => {
     const weekdaysBtn = document.getElementById("weekdays-btn");
@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const amBar = document.getElementById("am-bar");
     const pmBar = document.getElementById("pm-bar");
 
-    // Toggle between weekdays and weekend
     weekdaysBtn.addEventListener("click", () => toggleDayType("weekday"));
     weekendBtn.addEventListener("click", () => toggleDayType("weekend"));
 
@@ -22,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("heatmap-title").textContent =
             type === "weekday" ? "Weekdays Availability Heatmap" : "Weekend Availability Heatmap";
 
-        loadHeatmap();
+        loadHeatmap(); // Reload heatmap data when switching
     }
 
     document.getElementById("add-slot").addEventListener("click", () => {
