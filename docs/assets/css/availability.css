@@ -1,0 +1,652 @@
+@media screen and (max-width: 1680px) {
+
+    #main>header {
+        padding: 10em 0 8em 0;
+    }
+
+}
+
+@media screen and (max-width: 1280px) {
+
+    #main>header {
+        padding: 8em 3em 6em 3em;
+    }
+
+}
+
+@media screen and (max-width: 980px) {
+
+    #main>header {
+        padding: 10em 3em 8em 3em;
+    }
+
+}
+
+@media screen and (max-width: 736px) {
+
+    #main>header {
+        padding: 5em 3em 3em 3em;
+    }
+
+    #main>header h2 {
+        font-size: 1.25em;
+        margin: 0 0 1em 0;
+    }
+
+}
+
+body.is-mobile #main>header {
+    background-attachment: scroll;
+}
+
+/* Footer */
+
+#footer {
+    padding: 6em 0 4em 0;
+    background-color: #1d242a;
+    text-align: center;
+}
+
+#footer .icons {
+    font-size: 1.25em;
+}
+
+#footer .icons a {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#footer .icons a:hover {
+    color: #fff;
+}
+
+#footer .copyright {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8em;
+    letter-spacing: 0.225em;
+    list-style: none;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+#footer .copyright li {
+    border-left: solid 1px rgba(255, 255, 255, 0.5);
+    display: inline-block;
+    line-height: 1em;
+    margin-left: 1em;
+    padding-left: 1em;
+}
+
+#footer .copyright li:first-child {
+    border-left: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+#footer .copyright li a {
+    color: inherit;
+}
+
+#footer .copyright li a:hover {
+    color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+
+    #footer .copyright li {
+        border: 0;
+        display: block;
+        line-height: 1.65em;
+        margin: 0;
+        padding: 0.5em 0;
+    }
+
+}
+
+@media screen and (max-width: 980px) {
+
+    #footer {
+        padding: 4em 3em 2em 3em;
+    }
+
+}
+
+@media screen and (max-width: 736px) {
+
+    #footer {
+        padding: 3em 2em 1em 2em;
+    }
+
+}
+
+/* Landing */
+
+body.landing #page-wrapper {
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 0;
+}
+
+body.landing #footer {
+    background-color: rgba(29, 36, 42, 0.9);
+}
+
+body.is-mobile.landing #page-wrapper {
+    background: none;
+}
+
+body.is-mobile.landing #banner,
+body.is-mobile.landing .wrapper.style4 {
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-image: linear-gradient(top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../images/banner.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body.is-mobile.landing #footer {
+    background-color: #1d242a;
+}
+
+/* Button Styling for Availability */
+.fancy-button {
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(45deg, #1e90ff, #00bfff);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+}
+
+/* Hover Effect for Fancy Button */
+.fancy-button:hover {
+    background: linear-gradient(45deg, #00bfff, #1e90ff);
+    transform: scale(1.05);
+}
+
+/* Modal Styling for Availability Overlay */
+#availability-modal {
+    display: none;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Visibility Toggle */
+#availability-modal.active {
+    display: flex;
+}
+
+/* Modal Content Styling */
+.modal-content {
+    width: 90%;
+    /* Responsive width for smaller screens */
+    max-width: 600px;
+    /* Maximum width for larger screens */
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 10px;
+    overflow-y: auto;
+}
+
+/* Responsive Adjustments for Modal Content */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+/* Close Button for Modal */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Animation for Fade-In Effect */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Container for Modal Content */
+#container {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+    background: rgba(82, 78, 78, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Heatmap Section Styling */
+#heatmap {
+    margin-top: 20px;
+}
+
+/* Heatmap Bars and Labels */
+.heatmap-bar {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.hour-labels,
+.bar {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 4px;
+    text-align: center;
+}
+
+/* Hour Labels Styling */
+.hour-labels {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Heatmap Bar Cell Styling */
+.bar div {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: white;
+    border-radius: 4px;
+}
+
+/* Heatmap Levels (Low, Medium, High) */
+.low {
+    background-color: rgba(2, 150, 2, 0.39);
+    /* Light green */
+}
+
+.medium {
+    background-color: rgba(189, 186, 1, 0.644);
+    /* Medium green */
+}
+
+.high {
+    background-color: rgba(202, 36, 6, 0.815);
+    /* Dark green */
+}
+
+/* Responsive Adjustments for Smaller Screens */
+@media (max-width: 600px) {
+    body {
+        background-size: auto 100%;
+        background-position: top center;
+    }
+
+    #container {
+        width: 90%;
+    }
+
+    .hour-labels {
+        font-size: 10px;
+    }
+
+    .bar div {
+        height: 25px;
+        font-size: 10px;
+    }
+}
+
+/* Time Converter Section */
+#time-converter {
+    margin-top: 30px;
+    text-align: left;
+}
+
+#time-converter h2,
+#heatmap h2 {
+    text-align: center;
+}
+
+/* Converted Time Display */
+#converted-time-display {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Toggle Buttons for Weekdays/Weekend Selection */
+#toggle-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Styling for Toggle Button States */
+.toggle {
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    background-color: #6967679d;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+
+.toggle.active {
+    background-color: #353738b2;
+    color: #fff;
+}
+
+/* Input Field Styling within Container */
+#container input[type="time"] {
+    background-color: #f0f0f0;
+    /* Light gray background for better contrast */
+    color: #333;
+    /* Darker text color for readability */
+    border: 1px solid #ccc;
+    /* Border for defining edges */
+    padding: 8px;
+    border-radius: 4px;
+    width: calc(60% - 20px);
+    /* Adjust width to fit within the container */
+}
+
+/* Optional: Change color when input is focused */
+#container input[type="text"]:focus,
+#container input[type="time"]:focus {
+    background-color: #ffffff;
+    /* Slightly different background on focus */
+    border-color: #007bff;
+    /* Highlight border on focus */
+    color: #333;
+}
+
+/* Styling for the select dropdown */
+#container select {
+    background-color: #f0f0f0;
+    /* Light gray background for dropdown */
+    color: #333;
+    /* Darker text color for readability */
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+    width: 70%;
+}
+
+/* Styling for dropdown options */
+#container select option {
+    background-color: #f0f0f0;
+    /* Same background as dropdown for consistency */
+    color: #333;
+    /* Text color for options */
+}
+
+/* Styling for dropdown options on hover */
+#container select option:hover {
+    background-color: #007bff;
+    /* Blue background on hover */
+    color: #fff;
+    /* White text on hover */
+}
+
+/* Add space below the Server Time input box */
+#container input#server-time {
+    /* Replace #server-time with the actual ID if different */
+    margin-bottom: 15px;
+    /* Adjust this value to increase/decrease spacing */
+}
+
+/* Flexbox layout for positioning Server Time and Select City side by side */
+.input-row {
+    display: flex;
+    align-items: center;
+    /* Vertically center the label and input fields */
+    gap: 10px;
+    /* Adds space between elements */
+    margin-bottom: 20px;
+    /* Adds space below the row */
+}
+
+#server-time,
+#select-city {
+    flex: 1;
+    /* Each element takes equal width in the row */
+    padding: 8px;
+    background-color: #f0f0f0;
+    /* Light gray background for readability */
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Label styling */
+.input-row label {
+    white-space: nowrap;
+    /* Prevents labels from breaking onto multiple lines */
+}
+
+/* Flex layout for positioning Server Time and Select City fields side by side */
+.input-row {
+    display: flex;
+    justify-content: space-between;
+    /* Spaces out input groups evenly */
+    gap: 20px;
+    /* Adds space between the two input groups */
+    margin: 15px 0;
+    /* Adds spacing above and below the row */
+}
+
+/* Stacks label and input vertically in each input group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Aligns label and input to the start */
+    width: 100%;
+    /* Ensures equal width for both groups */
+}
+
+/* Styling for Convert Time button */
+#convert-time {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007bff00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Converted time display styling */
+#converted-time-display {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Styling for Time Slot container */
+#time-slots .time-slot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    /* Space between each Time Slot row */
+}
+
+/* Styling for the time slot label */
+.time-slot label {
+    font-weight: normal;
+    /* Make label text normal instead of bold */
+    font-size: 1em;
+    /* Adjust font size if needed */
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Specific styling for Time Slot start and end input fields */
+.start-time,
+.end-time {
+    width: 40px;
+    /* Set a fixed width matching Time Slot 1 */
+    padding: 4px;
+    margin-right: 5px;
+    /* Space between start and end times */
+    background-color: #e0e0e0;
+    /* Optional: distinct background color */
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    /* Centers text in the input fields */
+    box-sizing: border-box;
+    /* Ensures padding does not affect width */
+}
+
+/* Specific styling for Time Slot 2 inputs */
+#time-slots .time-slot:nth-child(2) .start-time,
+#time-slots .time-slot:nth-child(2) .end-time {
+    width: 120px;
+    /* Adjust width for Time Slot 2 */
+    padding: 4px;
+    /* Adjust padding for Time Slot 2 */
+}
+
+/* Specific styling for Time Slot 3 inputs */
+#time-slots .time-slot:nth-child(3) .start-time,
+#time-slots .time-slot:nth-child(3) .end-time {
+    width: 120px;
+    /* Adjust width for Time Slot 3 */
+    padding: 4px;
+    /* Adjust padding for Time Slot 3 */
+}
+
+/* Flex layout for time inputs and the remove button */
+.time-inputs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Styling for the remove (X) button */
+.remove-slot {
+    background: none;
+    border: none;
+    color: #ff0000;
+    /* Red color */
+    font-size: 1em;
+    /* Control the size of the "X" */
+    cursor: pointer;
+    padding: 0;
+    /* Remove padding */
+    width: 25px;
+    /* Set a fixed width */
+    height: 25px;
+    /* Set a fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-slot:hover {
+    color: #d00000;
+    /* Darker red on hover */
+}
+
+/* Style for the remove (X) button */
+.remove-slot {
+    background: none;
+    border: none;
+    color: #ffffff;
+    /* Red color */
+    font-size: 1em;
+    /* Control the size of the "X" */
+    cursor: pointer;
+    padding: 0;
+    /* Remove padding */
+    width: 25px;
+    /* Set a fixed width */
+    height: 25px;
+    /* Set a fixed height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.remove-slot:hover {
+    color: #d00000;
+    /* Darker red on hover */
+}
+
+/* Styling for Add More Slots and Submit Availability buttons */
+#add-slot,
+/* Add More Slots button */
+#availability-form button[type="submit"]
+
+/* Submit Availability button */
+    {
+    text-transform: capitalize;
+    /* Makes the text capitalized */
+    font-weight: normal;
+    /* Removes bold, makes text normal weight */
+    font-size: 0.9em;
+    /* Adjusts text size (smaller than default) */
+    padding: 6px 12px;
+    /* Adjust padding for smaller button size */
+    background-color: #28a745;
+    /* Background color (use your desired color) */
+    color: #fff;
+    /* White text color */
+    border: none;
+    /* Makes the button borderless */
+    border-radius: 4px;
+    /* Rounds corners (optional) */
+    cursor: pointer;
+    /* Changes cursor to pointer on hover */
+}
+
+/* Optional: Add hover effect */
+#add-slot:hover,
+#availability-form button[type="submit"]:hover {
+    background-color: #218838;
+    /* Darker green on hover (adjust as needed) */
+}
+
+/* Optional: Add focus effect for accessibility */
+#add-slot:focus,
+#availability-form button[type="submit"]:focus {
+    outline: 2px solid #218838;
+    /* Adds focus outline for accessibility */
+}

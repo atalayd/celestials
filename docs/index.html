@@ -1,101 +1,306 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Availability Tracker</title>
-    <link rel="stylesheet" href="css/style.css">
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js"></script>
-    <script type="module" src="js/script.js?v=1.2"></script> <!-- Cache-busting parameter -->
+	<title>Celestials</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/availability.css">
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+	</noscript>
 </head>
 
-<body>
-    <!-- Button to open modal -->
-    <button id="availability-button" class="fancy-button">Enter Your Availability</button>
+<body class="landing is-preload">
 
-    <!-- Modal container -->
-    <div id="availability-modal" class="modal-container">
-        <div id="container" class="modal-content">
-            <span id="close-modal" class="close-button">&times;</span>
-            <h1>Enter Your Availability</h1>
+	<!-- Page Wrapper -->
+	<div id="page-wrapper">
 
-            <!-- Toggle Buttons for Weekdays/Weekend -->
-            <div id="toggle-buttons">
-                <button id="weekdays-btn" class="toggle active">Weekdays</button>
-                <button id="weekend-btn" class="toggle">Weekend</button>
-            </div>
+		<!-- Header -->
+		<header id="header" class="alt">
+			<h1><a href="index.html">Celestials</a></h1>
+			<nav id="nav">
+				<ul>
+					<li class="special">
+						<a href="#menu" class="menuToggle"><span>Menu</span></a>
+						<div id="menu">
+							<ul>
+								<li><a href="index.html">Home</a></li>
+								<!-- <li><a href="generic.html">Generic</a></li>
+								<li><a href="elements.html">Elements</a></li> -->
+								<li><a href="#">Sign Up</a></li>
+								<li><a href="#">Log In</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</header>
 
-            <form id="availability-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" required placeholder="Enter your name">
+		<!-- Banner -->
+		<section id="banner">
+			<div class="inner">
+				<h2>Celestials</h2>
+				<p>Nation# 1209<br />
+					<!--	site template freebie<br />
+					crafted by <a href="http://html5up.net">HTML5 UP</a>.</p>   -->
+				<ul class="actions special">
+					<li><a href="#" class="button primary">Availability</a></li>
+				</ul>
+			</div>
+			<a href="#one" class="more scrolly">Learn More</a>
+		</section>
 
-                <label for="code">Unique Code:</label>
-                <input type="password" id="code" required placeholder="Enter the unique code">
+		<!-- One -->
 
-                <div id="time-slots">
-                    <div class="time-slot">
-                        <label>Time Slot 1:</label>
-                        <input type="time" class="start-time" required>
-                        <input type="time" class="end-time" required>
-                    </div>
-                </div>
-                <button type="button" id="add-slot">Add More Slots</button>
-                <button type="submit">Submit Availability</button>
-            </form>
+		<section id="one" class="wrapper style1 special">
+			<div class="inner">
+				<header class="major">
+					<h2>Brave Warriors of Celestials<br />
+						Welcome</h2>
+					<p>Please login to see detailed information about upcoming events.<br />
+						Check in daily!</p>
+				</header>
+				<ul class="icons major">
+					<li><span class="icon fa-gem major style1"><span class="label">Lorem</span></span></li>
+					<li><span class="icon fa-heart major style2"><span class="label">Ipsum</span></span></li>
+					<li><span class="icon solid fa-code major style3"><span class="label">Dolor</span></span></li>
+				</ul>
+			</div>
+		</section>
 
-            <!-- Heatmap with hour labels -->
-            <div id="heatmap">
-                <h2 id="heatmap-title">Weekdays Availability Heatmap</h2>
-                <div class="heatmap-bar">
-                    <div class="hour-labels">
-                        <span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
-                        <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span>
-                    </div>
-                    <div id="am-bar" class="bar"></div>
-                </div>
-                <div class="heatmap-bar">
-                    <div class="hour-labels">
-                        <span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
-                        <span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
-                    </div>
-                    <div id="pm-bar" class="bar"></div>
-                </div>
-            </div>
+		<!-- Two -->
+		<section id="two" class="wrapper alt style2">
+			<section class="spotlight">
+				<div class="image"><img src="images/pic01.jpg" alt="" /></div>
+				<div class="content">
+					<h2>Elite Wars
+						<br />
+					</h2>
+					<p>Schedule: Elite Wars
+					</p>
+				</div>
+			</section>
+			<section class="spotlight">
+				<div class="image"><img src="images/pic02.jpg" alt="" /></div>
+				<div class="content">
+					<h2>Zombie Uprise<br />
+						DOOM ARENA</h2>
+					<p>Wednesdays 13:00</p>
+				</div>
+			</section>
+			<section class="spotlight">
+				<div class="image"><img src="images/pic03.jpg" alt="" /></div>
+				<div class="content">
+					<h2>Ruins<br />
+					</h2>
+					<p>Usually around 13:00</p>
+				</div>
+			</section>
+		</section>
 
-            <!-- Time Zone Converter with City Dropdown -->
-            <div id="time-converter">
-                <h2>Time Zone Converter</h2>
-                <label for="server-time">Server Time (UTC):</label>
-                <input type="time" id="server-time" required>
+		<!-- Three -->
+		<section id="three" class="wrapper style3 special">
+			<div class="inner">
+				<header class="major">
+					<h2>CLS</h2>
+					<p>Celestials stands as a beacon of unity and resilience, united under shared values of honor and
+						loyalty.<br />
+						Together, we
+						rise stronger each day, welcoming warriors from all lands in our quest for supremacy.</p>
+				</header>
+				<ul class="features">
+					<li class="icon fa-paper-plane">
+						<h3>Alliance Strategy</h3>
+						<p>Guiding our every move, our strategy is built on the pillars of coordination and foresight.
+							Together, we craft a path to
+							victory.</p>
+					</li>
+					<li class="icon solid fa-laptop">
+						<h3>Resource Management</h3>
+						<p>From gathering to defending, every resource is safeguarded and utilized to strengthen our
+							ranks and sustain our
+							campaigns.</p>
+					</li>
+					<li class="icon solid fa-code">
+						<h3>Tech Advancements</h3>
+						<p>Pushing the boundaries of our power, we invest in technology that fortifies our defenses and
+							boosts our offensive
+							prowess.</p>
+					</li>
+					<li class="icon solid fa-headphones-alt">
+						<h3>Communication</h3>
+						<p>Clear and constant communication fuels our alliance, ensuring that no warrior is left behind
+							on the battlefield.</p>
+					</li>
+					<li class="icon fa-heart">
+						<h3>Battle Honors</h3>
+						<p>Recognizing the courage and sacrifices of our warriors. Every victory, big or small, brings
+							us closer to domination.</p>
+					</li>
+					<li class="icon fa-flag">
+						<h3>Training Grounds</h3>
+						<p>A place where rookies become legends. Our alliance fosters growth, honing skills that make us
+							an unstoppable force.</p>
+					</li>
+				</ul>
+			</div>
+		</section>
 
-                <label for="city">Select City:</label>
-                <select id="city">
-                    <option value="New_York">New York - EST</option>
-                    <option value="London">London - GMT</option>
-                    <option value="Sydney">Sydney - AEST</option>
-                    <option value="Tokyo">Tokyo - JST</option>
-                    <option value="Istanbul">Istanbul - TRT</option>
-                    <option value="Berlin">Berlin - CET</option>
-                    <option value="Los_Angeles">Los Angeles - PST</option>
-                    <option value="Shanghai">Shanghai - CST</option>
-                    <option value="Seoul">Seoul - KST</option>
-                    <option value="Cairo">Cairo - EET</option>
-                    <option value="Helsinki">Helsinki - EET</option> <!-- Finland -->
-                    <option value="Moscow">Moscow - MSK</option> <!-- Russia -->
-                    <option value="Taipei">Taipei - CST</option> <!-- Taiwan -->
-                    <option value="Sao_Paulo">São Paulo - BRT</option> <!-- Brazil -->
-                    <option value="Buenos_Aires">Buenos Aires - ART</option> <!-- Argentina -->
-                    <option value="Paris">Paris - CET</option> <!-- France -->
-                    <option value="Madrid">Madrid - CET</option> <!-- Spain -->
-                </select>
+		<!-- CTA -->
+		<section id="cta" class="wrapper style4">
+			<div class="inner">
+				<header>
+					<h2>Unleash Your Potential</h2>
+					<p>Unlock your warrior spirit with the Celestials. Strengthen your skills, forge friendships, and
+						make
+						your mark in the
+						world.</p>
+				</header>
+				<ul class="actions stacked">
+					<li><a href="#" class="button fit primary">Availability</a></li>
+					<li><a href="#" class="button fit">Learn More</a></li>
+				</ul>
+			</div>
+		</section>
 
-                <button id="convert-time">Convert Time</button>
-                <div id="converted-time-display"></div>
-            </div>
-        </div>
-    </div>
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+				<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>&copy; Celestials</li>
+				<li>Design: <a href="#">Mystic</a></li>
+			</ul>
+		</footer>
+		<!-- Availability Modal -->
+		<div id="availability-modal" class="modal-container">
+			<div id="container" class="modal-content">
+				<span id="close-modal" class="close-button">&times;</span>
+				<h1>Enter Your Availability</h1>
+
+				<!-- Toggle Buttons for Weekdays/Weekend -->
+				<div id="toggle-buttons">
+					<button id="weekdays-btn" class="toggle active">Weekdays</button>
+					<button id="weekend-btn" class="toggle">Weekend</button>
+				</div>
+
+				<form id="availability-form">
+					<label for="name">Name:</label>
+					<input type="text" id="name" required placeholder="Enter your name">
+
+					<label for="code">Unique Code:</label>
+					<input type="password" id="code" required placeholder="Enter the unique code">
+
+					<!-- Time Slots Container -->
+					<div id="time-slots">
+						<div class="time-slot">
+							<label>Time Slot 1</label>
+							<div class="time-inputs">
+								<input type="time" class="start-time" required>
+								<input type="time" class="end-time" required>
+								<button type="button" class="remove-slot" aria-label="Remove Time Slot">&times;</button>
+								<!-- "X" button -->
+							</div>
+						</div>
+					</div>
+
+					<button type="button" id="add-slot">Add More Slots</button>
+					<button type="submit">Submit Availability</button>
+				</form>
+
+				<!-- Heatmap with hour labels -->
+				<div id="heatmap">
+					<h2 id="heatmap-title"
+						style="font-size: 1.2em; font-weight: normal; color: #fafafa; text-align: center; margin: 0.5em 0;text-transform: none;">
+						Weekdays Availability Heatmap
+					</h2>
+					<div class="heatmap-bar">
+						<div class="hour-labels">
+							<span>00</span><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+							<span>06</span><span>07</span><span>08</span><span>09</span><span>10</span><span>11</span>
+						</div>
+						<div id="am-bar" class="bar"></div>
+					</div>
+					<div class="heatmap-bar">
+						<div class="hour-labels">
+							<span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+							<span>18</span><span>19</span><span>20</span><span>21</span><span>22</span><span>23</span>
+						</div>
+						<div id="pm-bar" class="bar"></div>
+					</div>
+				</div>
+
+				<!-- Time Zone Converter with City Dropdown -->
+				<div id="time-converter">
+					<h2 id="time-converter-title"
+						style="font-size: 1.2em; font-weight: normal; color: #fafafa; text-align: center; margin: 0.5em 0; text-transform: none;">
+						Time Zone Converter
+					</h2>
+
+					<!-- Flex container for Server Time and Select City fields -->
+					<div class="input-row">
+						<div class="input-group">
+							<label for="server-time">Server Time (UTC):</label>
+							<input type="time" id="server-time" required>
+						</div>
+
+						<div class="input-group">
+							<label for="city">Select City:</label>
+							<select id="city">
+								<option value="New_York">New York - EST</option>
+								<option value="London">London - GMT</option>
+								<option value="Sydney">Sydney - AEST</option>
+								<option value="Tokyo">Tokyo - JST</option>
+								<option value="Istanbul">Istanbul - TRT</option>
+								<option value="Berlin">Berlin - CET</option>
+								<option value="Los_Angeles">Los Angeles - PST</option>
+								<option value="Shanghai">Shanghai - CST</option>
+								<option value="Seoul">Seoul - KST</option>
+								<option value="Cairo">Cairo - EET</option>
+								<option value="Helsinki">Helsinki - EET</option> <!-- Finland -->
+								<option value="Moscow">Moscow - MSK</option> <!-- Russia -->
+								<option value="Taipei">Taipei - CST</option> <!-- Taiwan -->
+								<option value="Sao_Paulo">São Paulo - BRT</option> <!-- Brazil -->
+								<option value="Buenos_Aires">Buenos Aires - ART</option> <!-- Argentina -->
+								<option value="Paris">Paris - CET</option> <!-- France -->
+								<option value="Madrid">Madrid - CET</option> <!-- Spain -->
+							</select>
+						</div>
+					</div>
+
+					<button id="convert-time">Convert Time</button>
+					<div id="converted-time-display"></div>
+				</div>
+
+
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script type="module" src="assets/js/firebase-functions.js"></script>
+	<script type="module" src="assets/js/script.js"></script>
+
 </body>
 
 </html>

@@ -1,29 +1,16 @@
 import { db } from "./firebase-config.js";
 import { collection, getDocs, query, where, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
-const uniqueCode = "2025";
-let selectedType = "weekday";
-
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("availability-modal");
-    const openModalBtn = document.getElementById("availability-button");
+    const openModalBtn = document.querySelector(".button.primary");
     const closeModalBtn = document.getElementById("close-modal");
 
-    // Open modal when the button is clicked
-    openModalBtn.addEventListener("click", () => {
-        modal.classList.add("active");
-    });
+    openModalBtn.addEventListener("click", () => modal.classList.add("active"));
+    closeModalBtn.addEventListener("click", () => modal.classList.remove("active"));
 
-    // Close modal when the close button is clicked
-    closeModalBtn.addEventListener("click", () => {
-        modal.classList.remove("active");
-    });
-
-    // Close modal when clicking outside the modal content
     window.addEventListener("click", (event) => {
-        if (event.target === modal) {
-            modal.classList.remove("active");
-        }
+        if (event.target === modal) modal.classList.remove("active");
     });
 
     const weekdaysBtn = document.getElementById("weekdays-btn");
@@ -33,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     weekdaysBtn.addEventListener("click", () => toggleDayType("weekday"));
     weekendBtn.addEventListener("click", () => toggleDayType("weekend"));
+
+    let selectedType = "weekday";
 
     function toggleDayType(type) {
         selectedType = type;
@@ -45,54 +34,12 @@ document.addEventListener("DOMContentLoaded", () => {
         loadHeatmap();
     }
 
-    document.getElementById("add-slot").addEventListener("click", () => {
-        const timeSlots = document.getElementById("time-slots");
-
-        // Limit to 3 time slots
-        if (timeSlots.childElementCount < 3) {
-            const slotNumber = timeSlots.childElementCount + 1;
-
-            // Create a new time slot container with a remove button
-            const newSlot = document.createElement("div");
-            newSlot.className = "time-slot";
-            newSlot.innerHTML = `
-            <label>Time Slot ${slotNumber}:</label>
-            <input type="time" class="start-time" required>
-            <input type="time" class="end-time" required>
-            ${slotNumber > 1 ? '<button type="button" class="remove-slot">×</button>' : ''}
-        `;
-
-            timeSlots.appendChild(newSlot);
-
-            // Add event listener to the remove button
-            if (slotNumber > 1) {
-                newSlot.querySelector(".remove-slot").addEventListener("click", () => {
-                    timeSlots.removeChild(newSlot);
-                    updateSlotLabels();
-                });
-            }
-        }
-    });
-
-    // Function to update slot labels after a slot is removed
-    function updateSlotLabels() {
-        const slots = document.querySelectorAll(".time-slot");
-        slots.forEach((slot, index) => {
-            const label = slot.querySelector("label");
-            if (label) {
-                label.textContent = `Time Slot ${index + 1}:`;
-            }
-        });
-    }
-
-
     document.getElementById("availability-form").addEventListener("submit", async (event) => {
         event.preventDefault();
-
         const nameInput = document.getElementById("name").value.trim().toLowerCase();
         const enteredCode = document.getElementById("code").value.trim();
 
-        if (enteredCode !== uniqueCode) {
+        if (enteredCode !== "2025") {
             alert("Invalid code. Please enter the correct unique code.");
             return;
         }
@@ -102,30 +49,25 @@ document.addEventListener("DOMContentLoaded", () => {
             end: slot.querySelector(".end-time").value
         }));
 
-        try {
-            const usersCollection = collection(db, "availability");
-            const q = query(usersCollection, where("name", "==", nameInput));
-            const querySnapshot = await getDocs(q);
+        const usersCollection = collection(db, "availability");
+        const q = query(usersCollection, where("name", "==", nameInput));
+        const querySnapshot = await getDocs(q);
 
-            const updateField = selectedType === "weekday" ? "weekdayTimeSlots" : "weekendTimeSlots";
+        const updateField = selectedType === "weekday" ? "weekdayTimeSlots" : "weekendTimeSlots";
 
-            if (!querySnapshot.empty) {
-                const userDoc = querySnapshot.docs[0];
-                await updateDoc(doc(db, "availability", userDoc.id), { [updateField]: timeSlots });
-                alert(`Availability updated for existing user (${selectedType}).`);
-            } else {
-                await addDoc(usersCollection, {
-                    name: nameInput,
-                    weekdayTimeSlots: selectedType === "weekday" ? timeSlots : [],
-                    weekendTimeSlots: selectedType === "weekend" ? timeSlots : []
-                });
-                alert(`New user created with ${selectedType} availability.`);
-            }
-
-            loadHeatmap();
-        } catch (error) {
-            console.error("Error processing availability:", error);
+        if (!querySnapshot.empty) {
+            const userDoc = querySnapshot.docs[0];
+            await updateDoc(doc(db, "availability", userDoc.id), { [updateField]: timeSlots });
+            alert(`Availability updated for existing user (${selectedType}).`);
+        } else {
+            await addDoc(usersCollection, {
+                name: nameInput,
+                weekdayTimeSlots: selectedType === "weekday" ? timeSlots : [],
+                weekendTimeSlots: selectedType === "weekend" ? timeSlots : []
+            });
+            alert(`New user created with ${selectedType} availability.`);
         }
+        loadHeatmap();
     });
 
     async function loadHeatmap() {
@@ -140,18 +82,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 const endHour = parseInt(slot.end.split(":")[0]);
 
                 if (startHour <= endHour) {
-                    // Case 1: Time range within the same day (e.g., 10 AM to 4 PM)
                     for (let i = startHour; i < endHour; i++) {
                         if (i < 12) amHours[i]++;
                         else pmHours[i - 12]++;
                     }
                 } else {
-                    // Case 2: Time range spans midnight (e.g., 10 PM to 4 AM)
-                    for (let i = startHour; i < 24; i++) { // from startHour to 23
+                    for (let i = startHour; i < 24; i++) {
                         if (i < 12) pmHours[i - 12]++;
                         else pmHours[i - 12]++;
                     }
-                    for (let i = 0; i < endHour; i++) { // from 0 to endHour
+                    for (let i = 0; i < endHour; i++) {
                         if (i < 12) amHours[i]++;
                         else amHours[i - 12]++;
                     }
@@ -176,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     const timeZones = {
         "New_York": "America/New_York",
         "London": "Europe/London",
@@ -188,13 +127,13 @@ document.addEventListener("DOMContentLoaded", () => {
         "Shanghai": "Asia/Shanghai",
         "Seoul": "Asia/Seoul",
         "Cairo": "Africa/Cairo",
-        "Helsinki": "Europe/Helsinki",             // Finland
-        "Moscow": "Europe/Moscow",                 // Russia
-        "Taipei": "Asia/Taipei",                   // Taiwan
-        "Sao_Paulo": "America/Sao_Paulo",          // Brazil
-        "Buenos_Aires": "America/Argentina/Buenos_Aires", // Argentina
-        "Paris": "Europe/Paris",                   // France
-        "Madrid": "Europe/Madrid"                  // Spain
+        "Helsinki": "Europe/Helsinki",
+        "Moscow": "Europe/Moscow",
+        "Taipei": "Asia/Taipei",
+        "Sao_Paulo": "America/Sao_Paulo",
+        "Buenos_Aires": "America/Argentina/Buenos_Aires",
+        "Paris": "Europe/Paris",
+        "Madrid": "Europe/Madrid"
     };
 
     document.getElementById("convert-time").addEventListener("click", () => {
@@ -224,5 +163,5 @@ document.addEventListener("DOMContentLoaded", () => {
         display.textContent = `${cityName}: ${convertedTime}`;
     });
 
-    toggleDayType("weekday"); // Initialize as weekday
+    toggleDayType("weekday");
 });
