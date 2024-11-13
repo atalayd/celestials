@@ -197,11 +197,17 @@
 				</div>
 
 				<form id="availability-form">
-					<label for="name">Name:</label>
-					<input type="text" id="name" required placeholder="Enter your name">
+					<div class="input-row">
+						<div class="input-group">
+							<label for="name">Name:</label>
+							<input type="text" id="name" required placeholder="Enter your name">
+						</div>
+						<div class="input-group">
+							<label for="code">Unique Code:</label>
+							<input type="password" id="code" required placeholder="Enter the unique code">
+						</div>
+					</div>
 
-					<label for="code">Unique Code:</label>
-					<input type="password" id="code" required placeholder="Enter the unique code">
 
 					<!-- Time Slots Container -->
 					<div id="time-slots">

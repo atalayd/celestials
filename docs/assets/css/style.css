@@ -40,12 +40,35 @@ body {
 
 .modal-content {
     background-color: white;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
-    max-width: 600px;
-    width: 90%;
+    width: 80vw;
+    /* 80% of viewport width */
+    max-width: 500px;
+    /* Cap width at 500px */
+    height: auto;
+    max-height: 90vh;
+    /* Cap height at 90% of viewport height */
     position: relative;
     animation: fadeIn 0.5s;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90vw;
+        /* Slightly wider on smaller screens */
+        max-width: 400px;
+        /* Lower max width for mobile */
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        width: 95vw;
+        max-width: 350px;
+        padding: 10px;
+    }
 }
 
 .close-button {
@@ -199,4 +222,46 @@ body {
 .toggle.active {
     background-color: #007bff;
     color: #fff;
+}
+
+/* Flex container for Name and Unique Code fields */
+.input-row {
+    display: flex;
+    gap: 20px;
+    /* Space between Name and Unique Code groups */
+    margin-bottom: 15px;
+    /* Space below the row */
+    justify-content: center;
+    /* Center-aligns the row */
+}
+
+/* Styling for individual label and input group */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 200px;
+    /* Adjust width as needed */
+}
+
+/* Adjusting label styling */
+.input-group label {
+    font-weight: normal;
+    font-size: 1em;
+    margin-bottom: 5px;
+    /* Space between label and input */
+    color: #333;
+}
+
+/* Styling for the input fields */
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    color: #333;
+    box-sizing: border-box;
+    /* Ensures padding doesn’t affect width */
 }
