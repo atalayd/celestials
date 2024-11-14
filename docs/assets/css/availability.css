@@ -30,6 +30,7 @@
 
     #main>header h2 {
         font-size: 1.25em;
+        font-weight: normal;
         margin: 0 0 1em 0;
     }
 
@@ -273,7 +274,7 @@ body.is-mobile.landing #footer {
 
 /* Hour Labels Styling */
 .hour-labels {
-    font-weight: bold;
+    font-weight: normal;
     margin-bottom: 5px;
 }
 
@@ -290,7 +291,7 @@ body.is-mobile.landing #footer {
 
 /* Heatmap Levels (Low, Medium, High) */
 .low {
-    background-color: rgba(2, 150, 2, 0.39);
+    background-color: rgba(34, 206, 34, 0.39);
     /* Light green */
 }
 
@@ -300,7 +301,7 @@ body.is-mobile.landing #footer {
 }
 
 .high {
-    background-color: rgba(202, 36, 6, 0.815);
+    background-color: rgba(240, 73, 7, 0.815);
     /* Dark green */
 }
 
@@ -323,24 +324,6 @@ body.is-mobile.landing #footer {
         height: 25px;
         font-size: 10px;
     }
-}
-
-/* Time Converter Section */
-#time-converter {
-    margin-top: 30px;
-    text-align: left;
-}
-
-#time-converter h2,
-#heatmap h2 {
-    text-align: center;
-}
-
-/* Converted Time Display */
-#converted-time-display {
-    margin-top: 10px;
-    font-weight: bold;
-    text-align: center;
 }
 
 /* Toggle Buttons for Weekdays/Weekend Selection */
@@ -425,6 +408,7 @@ body.is-mobile.landing #footer {
 #container input#server-time {
     /* Replace #server-time with the actual ID if different */
     margin-bottom: 15px;
+    width: 130px;
     /* Adjust this value to increase/decrease spacing */
 }
 
@@ -468,34 +452,7 @@ body.is-mobile.landing #footer {
     /* Adds spacing above and below the row */
 }
 
-/* Stacks label and input vertically in each input group */
-.input-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* Aligns label and input to the start */
-    width: 100%;
-    /* Ensures equal width for both groups */
-}
 
-/* Styling for Convert Time button */
-#convert-time {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 1em;
-    background-color: #007bff00;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Converted time display styling */
-#converted-time-display {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #ffffff;
-}
 
 /* Styling for Time Slot container */
 #time-slots .time-slot {

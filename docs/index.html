@@ -12,6 +12,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<link rel="stylesheet" href="assets/css/availability.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+
+
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
 	</noscript>
@@ -255,15 +258,15 @@
 						Time Zone Converter
 					</h2>
 
-					<!-- Flex container for Server Time and Select City fields -->
-					<div class="input-row">
+					<!-- Flex container for Server Time, Select City, Convert Time button, and output -->
+					<div class="converter-row">
 						<div class="input-group">
 							<label for="server-time">Server Time (UTC):</label>
 							<input type="time" id="server-time" required>
 						</div>
 
 						<div class="input-group">
-							<label for="city">Select City:</label>
+							<label id="city-label" for="city">Select City:</label> <!-- Added id to the label -->
 							<select id="city">
 								<option value="New_York">New York - EST</option>
 								<option value="London">London - GMT</option>
@@ -275,37 +278,38 @@
 								<option value="Shanghai">Shanghai - CST</option>
 								<option value="Seoul">Seoul - KST</option>
 								<option value="Cairo">Cairo - EET</option>
-								<option value="Helsinki">Helsinki - EET</option> <!-- Finland -->
-								<option value="Moscow">Moscow - MSK</option> <!-- Russia -->
-								<option value="Taipei">Taipei - CST</option> <!-- Taiwan -->
-								<option value="Sao_Paulo">São Paulo - BRT</option> <!-- Brazil -->
-								<option value="Buenos_Aires">Buenos Aires - ART</option> <!-- Argentina -->
-								<option value="Paris">Paris - CET</option> <!-- France -->
-								<option value="Madrid">Madrid - CET</option> <!-- Spain -->
+								<option value="Helsinki">Helsinki - EET</option>
+								<option value="Moscow">Moscow - MSK</option>
+								<option value="Taipei">Taipei - CST</option>
+								<option value="Sao_Paulo">São Paulo - BRT</option>
+								<option value="Buenos_Aires">Buenos Aires - ART</option>
+								<option value="Paris">Paris - CET</option>
+								<option value="Madrid">Madrid - CET</option>
 							</select>
+						</div>
+
+						<!-- Container for Convert Time button and output -->
+						<div class="convert-output-group">
+							<button id="convert-time">Convert Time</button>
+							<div id="converted-time-display"></div>
 						</div>
 					</div>
 
-					<button id="convert-time">Convert Time</button>
-					<div id="converted-time-display"></div>
+
 				</div>
 
-
 			</div>
-		</div>
 
-	</div>
-
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script type="module" src="assets/js/firebase-functions.js"></script>
-	<script type="module" src="assets/js/script.js"></script>
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			<script type="module" src="assets/js/firebase-functions.js"></script>
+			<script type="module" src="assets/js/script.js"></script>
 
 </body>
 

@@ -2617,6 +2617,12 @@ button.primary,
 	background-color: #ed4933;
 	box-shadow: none !important;
 	color: #ffffff !important;
+	padding: 0;
+	text-transform: capitalize;
+	/* Default padding */
+	font-size: 1em;
+	/* Default font size */
+	border-radius: 5px;
 }
 
 input[type="submit"].primary:hover,

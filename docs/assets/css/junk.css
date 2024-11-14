@@ -1,0 +1,195 @@
+/* Styling for Convert Time button */
+#convert-time {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #007bff00;
+    text-transform: capitalize;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Converted time display styling */
+#converted-time-display {
+    margin-top: 10px;
+    font-weight: normal;
+    color: #ffffff;
+}
+
+/* Ensure consistent style for input, select, and button */
+.converter-row input,
+.converter-row select,
+#convert-time {
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Container for Convert Time button and output display */
+.convert-output-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for the Convert Time button */
+#convert-time {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+    /* Space between button and output */
+}
+
+/* Hover effect for Convert Time button */
+#convert-time:hover {
+    background-color: #0056b3;
+}
+
+/* Styling for the converted time output */
+#converted-time-display {
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-top: 5px;
+    /* Optional space between output and button */
+}
+
+/* Converted Time Display */
+#converted-time-display {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Flex container to align elements in a single row */
+.converter-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* Space between each element */
+    justify-content: center;
+    margin-bottom: 20px;
+    /* Space below the row */
+}
+
+/* Styling for each input group */
+.converter-row .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+/* Align label text and input fields */
+.converter-row label {
+    font-weight: normal;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 768px) {
+    .converter-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* ===== Styling for Time Converter Section ===== */
+#time-converter {
+    margin-top: 10px;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+#time-converter h2 {
+    font-size: 1em;
+    font-weight: normal;
+    text-transform: capitalize;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+/* Layout for aligning Server Time, Select City, and Convert button */
+.converter-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    /* Space between elements */
+    justify-content: flex-start;
+    /* Aligns items to the left */
+    margin-bottom: 10px;
+    /* Space below the row */
+}
+
+/* Input and Select Styling */
+.converter-row input[type="time"],
+.converter-row select {
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    color: #333;
+    width: 150px;
+}
+
+/* Responsive layout adjustments for small screens */
+@media (max-width: 768px) {
+    .converter-row {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .converter-row input[type="time"],
+    .converter-row select {
+        width: 20%;
+        /* Removed width from #convert-time to avoid pushing it to full width */
+    }
+
+    /* Styling for Convert Time button */
+    #convert-time {
+        padding: 1em;
+        font-size: 1em;
+        font-weight: normal;
+        text-transform: capitalize;
+        background-color: #3b444e;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        /* Removed float, using flex alignment in container instead */
+    }
+
+    /* Flex container to align Convert Time button to the right */
+    .convert-output-group {
+        display: flex;
+        justify-content: flex-end;
+        /* Aligns button to the right edge */
+        width: 100%;
+        font-weight: normal;
+        /* Ensures container takes full width */
+        margin-right: 5px;
+        /* Optional: adds spacing from the right edge */
+    }
+
+    #convert-time:hover {
+        background-color: #606e7ed2;
+    }
+
+    /* Styling for the converted time output */
+    #converted-time-display {
+        font-weight: normal;
+        color: #ffffff;
+        text-align: right;
+        margin-top: 8px;
+    }
