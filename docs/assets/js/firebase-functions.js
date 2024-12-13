@@ -1,5 +1,6 @@
 import { db } from "./firebase-config.js";
 import { collection, getDocs, query, where, addDoc, updateDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById("availability-modal");
@@ -21,8 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     weekdaysBtn.addEventListener("click", () => toggleDayType("weekday"));
     weekendBtn.addEventListener("click", () => toggleDayType("weekend"));
 
-    let selectedType = "weekday";
+    let selectedType = "weekday"; // Tracks whether the user is viewing weekday or weekend heatmap.
 
+    /**
+     * Toggles between weekday and weekend heatmap views.
+     * @param {string} type - Either "weekday" or "weekend".
+     */
     function toggleDayType(type) {
         selectedType = type;
         weekdaysBtn.classList.toggle("active", type === "weekday");
@@ -31,9 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("heatmap-title").textContent =
             type === "weekday" ? "Weekdays Availability Heatmap" : "Weekend Availability Heatmap";
 
-        loadHeatmap();
+        loadHeatmap(); // Reloads heatmap data based on the selected type.
     }
 
+    // Form submission to update availability data.
     document.getElementById("availability-form").addEventListener("submit", async (event) => {
         event.preventDefault();
         const nameInput = document.getElementById("name").value.trim().toLowerCase();
@@ -67,55 +73,77 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             alert(`New user created with ${selectedType} availability.`);
         }
-        loadHeatmap();
+        loadHeatmap(); // Reloads the heatmap with updated data.
     });
 
+    /**
+     * Loads heatmap data from Firestore and renders it on the page.
+     * Uses Firebase Authentication to ensure only logged-in users can access the data.
+     */
     async function loadHeatmap() {
-        const amHours = Array(12).fill(0);
-        const pmHours = Array(12).fill(0);
+        const amHours = Array(12).fill(0); // Tracks AM hour availability counts.
+        const pmHours = Array(12).fill(0); // Tracks PM hour availability counts.
 
-        const snapshot = await getDocs(collection(db, "availability"));
-        snapshot.forEach(doc => {
-            const timeSlots = doc.data()[selectedType === "weekday" ? "weekdayTimeSlots" : "weekendTimeSlots"] || [];
-            timeSlots.forEach(slot => {
-                const startHour = parseInt(slot.start.split(":")[0]);
-                const endHour = parseInt(slot.end.split(":")[0]);
+        const auth = getAuth();
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                console.log("Authenticated user:", user.uid);
+                try {
+                    const snapshot = await getDocs(collection(db, "availability"));
+                    snapshot.forEach(doc => {
+                        const timeSlots = doc.data()[selectedType === "weekday" ? "weekdayTimeSlots" : "weekendTimeSlots"] || [];
+                        timeSlots.forEach(slot => {
+                            const startHour = parseInt(slot.start.split(":")[0]);
+                            const endHour = parseInt(slot.end.split(":")[0]);
 
-                if (startHour <= endHour) {
-                    for (let i = startHour; i < endHour; i++) {
-                        if (i < 12) amHours[i]++;
-                        else pmHours[i - 12]++;
-                    }
-                } else {
-                    for (let i = startHour; i < 24; i++) {
-                        if (i < 12) pmHours[i - 12]++;
-                        else pmHours[i - 12]++;
-                    }
-                    for (let i = 0; i < endHour; i++) {
-                        if (i < 12) amHours[i]++;
-                        else amHours[i - 12]++;
-                    }
+                            if (startHour <= endHour) {
+                                for (let i = startHour; i < endHour; i++) {
+                                    if (i < 12) amHours[i]++;
+                                    else pmHours[i - 12]++;
+                                }
+                            } else {
+                                for (let i = startHour; i < 24; i++) {
+                                    if (i < 12) pmHours[i - 12]++;
+                                    else pmHours[i - 12]++;
+                                }
+                                for (let i = 0; i < endHour; i++) {
+                                    if (i < 12) amHours[i]++;
+                                    else amHours[i - 12]++;
+                                }
+                            }
+                        });
+                    });
+
+                    // Renders the heatmap for AM hours.
+                    amBar.innerHTML = "";
+                    amHours.forEach((count) => {
+                        const cell = document.createElement("div");
+                        cell.className = count > 5 ? "high" : count > 2 ? "medium" : "low";
+                        cell.textContent = count > 0 ? count : "";
+                        amBar.appendChild(cell);
+                    });
+
+                    // Renders the heatmap for PM hours.
+                    pmBar.innerHTML = "";
+                    pmHours.forEach((count) => {
+                        const cell = document.createElement("div");
+                        cell.className = count > 5 ? "high" : count > 2 ? "medium" : "low";
+                        cell.textContent = count > 0 ? count : "";
+                        pmBar.appendChild(cell);
+                    });
+
+                } catch (error) {
+                    console.error("Error fetching data:", error);
+                    alert("Could not load heatmap data. Please try again.");
                 }
-            });
-        });
-
-        amBar.innerHTML = "";
-        amHours.forEach((count) => {
-            const cell = document.createElement("div");
-            cell.className = count > 5 ? "high" : count > 2 ? "medium" : "low";
-            cell.textContent = count > 0 ? count : "";
-            amBar.appendChild(cell);
-        });
-
-        pmBar.innerHTML = "";
-        pmHours.forEach((count) => {
-            const cell = document.createElement("div");
-            cell.className = count > 5 ? "high" : count > 2 ? "medium" : "low";
-            cell.textContent = count > 0 ? count : "";
-            pmBar.appendChild(cell);
+            } else {
+                console.error("User not authenticated. Cannot load heatmap.");
+                alert("You must be logged in to view the heatmap.");
+            }
         });
     }
 
+    // Time zone conversion functionality for converting server time to local time zones.
     const timeZones = {
         "New_York": "America/New_York",
         "London": "Europe/London",
@@ -163,5 +191,6 @@ document.addEventListener("DOMContentLoaded", () => {
         display.textContent = `${cityName}: ${convertedTime}`;
     });
 
+    // Default view to load weekday heatmap on page load.
     toggleDayType("weekday");
 });
